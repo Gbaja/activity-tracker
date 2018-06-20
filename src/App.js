@@ -59,7 +59,7 @@ class App extends Component {
     return <div className="app">
         <header>
           <div className="wrapper">
-            <h1>Activity tracker</h1>
+            <h1>Laide's Activity tracker</h1>
           </div>
         </header>
         <div className="container">

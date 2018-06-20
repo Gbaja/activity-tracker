@@ -132,3 +132,18 @@ button {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
 }
+
+@media only screen and (max-width: 600px){
+  .container, ul{
+    flex-direction: column;
+  }
+  .display-item, .add-item{
+    width: 80%;
+  }
+  .add-item, li{
+    margin: 20px auto;
+  }
+  li{
+    width: 100%;
+  }
+}
