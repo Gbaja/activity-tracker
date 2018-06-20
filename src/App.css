@@ -132,7 +132,11 @@ button {
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   padding: 10px 6px;
 }
-
+.anchor_tags{
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
 @media only screen and (max-width: 600px){
   .container, ul{
     flex-direction: column;
