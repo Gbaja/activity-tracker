@@ -32,7 +32,7 @@ describe("Activities tests", ()=>{
 })
 
 describe("Activities container tests", ()=>{
-    it("", ()=>{
+    it("Testing states", ()=>{
         const wrapper = shallow(
                 <ActivitiesContainer />,
                 {
