@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Landing from "./Landing"
-import Activities from "./Activities"
+import ActivitiesContainer from "./Activities/ActivitiesContainer"
 
 class App extends Component {
   render() {
@@ -17,7 +17,7 @@ class App extends Component {
         <Route
           exact
           path="/activities"
-          component={Activities} />
+          component={ActivitiesContainer} />
           }
       />
       </Switch>
