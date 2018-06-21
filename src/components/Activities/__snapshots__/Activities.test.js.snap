@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Activities tests Activities snapshot passes 1`] = `
+<div
+  className="app"
+>
+  <header>
+    <div
+      className="wrapper"
+    >
+      <h1>
+        Laide's Activity tracker
+      </h1>
+    </div>
+  </header>
+  <section
+    className="display-item"
+  >
+    <div>
+      <button>
+        <a
+          className="anchor_tags"
+          href="/"
+          onClick={[Function]}
+        >
+          Back
+        </a>
+      </button>
+    </div>
+    <div
+      className="wrapper"
+    >
+      <ul>
+        <li>
+          <h3>
+            Date: 
+            12/03/2018
+          </h3>
+          <p>
+            Notes: 
+            Write tests
+          </p>
+          <button
+            onClick={[Function]}
+          >
+            Remove Item
+          </button>
+        </li>
+        <li>
+          <h3>
+            Date: 
+            22/04/2018
+          </h3>
+          <p>
+            Notes: 
+            Write more tests
+          </p>
+          <button
+            onClick={[Function]}
+          >
+            Remove Item
+          </button>
+        </li>
+        <li>
+          <h3>
+            Date: 
+            02/05/2018
+          </h3>
+          <p>
+            Notes: 
+            Write even more tests
+          </p>
+          <button
+            onClick={[Function]}
+          >
+            Remove Item
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+`;
