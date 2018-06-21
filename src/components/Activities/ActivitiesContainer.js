@@ -8,7 +8,7 @@ class ActivitiesContainer extends Component {
         super();
         this.state = { 
             loading: false,
-            items: [] 
+            items: []
         };
     }
 
@@ -38,10 +38,18 @@ class ActivitiesContainer extends Component {
         const itemRef = firebase.database().ref(`/items/${itemId}`);
         itemRef.remove();
     }
+
+    changeIt = (array) => {
+        return array.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date);
+
+        })
+    }
+    
     render() {
         return (
             <Activities 
-            activities={this.state.items} 
+            activities={this.changeIt(this.state.items)} 
             removeItem={this.removeItem} 
             loading={this.state.loading}
             />
