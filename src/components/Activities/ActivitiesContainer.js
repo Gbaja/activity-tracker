@@ -10,28 +10,35 @@ class ActivitiesContainer extends Component {
             loading: false,
             items: []
         };
+        this.itemsRef = firebase.database().ref("items");
     }
 
-    componentDidMount() {
-        const itemsRef = firebase.database().ref("items");
+
+
+    componentWillMount() {
         this.setState({loading: true}, ()=>{
-            itemsRef.on('value', (snapshot) => {
-                let items = snapshot.val();
-                let newState = [];
-                for (let item in items) {
-                    newState.push({
-                        id: item,
-                        date: items[item].date,
-                        notes: items[item].notes
-                    });
-                }
-                this.setState({
+            this.itemsRef.on('value', (snapshot) => {
+                const items = snapshot.val();
+                const newState = Object.keys(items).map(key => ({
+                    id: key,
+                    date: items[key].date,
+                    notes: items[key].notes,
+                }))
+
+                this.setState(previousState => ({
+                    ...previousState,
                     items: newState,
-                    loading: false
-                });
+                    loading: false,
+                })
+            )
             });
         });
+
         
+    }
+
+    componentWillUnmount() {
+        this.itemsRef.off();
     }
 
     removeItem(itemId) {
