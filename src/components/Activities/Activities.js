@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 
-import Header from "../Header"
+import Loading from "../Loading"
 
 const Activities = props => {
 
@@ -10,17 +10,17 @@ const Activities = props => {
   return (
     <Fragment>
       <div className="app">
-        <Header />
+
         <section className="display-item">
           <div>
             <button>
-              <Link className="anchor_tags" to="/">
+              <Link className="anchor_tags" to="/landing">
                 Back
               </Link>
             </button>
           </div>
           <div className="wrapper">
-            {loading ? <div> Loading </div> : <ul>
+            {loading ? <Loading/> : <ul>
               {activities.map(activity => {
                 return <li key={activity.id}>
                   <h3>Date: {activity.date}</h3>

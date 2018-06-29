@@ -7,6 +7,8 @@
     "node": "8.8.1"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
+    "env2": "^2.2.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "firebase": "^5.0.4",

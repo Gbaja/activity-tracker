@@ -1,11 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 import Activities from "./Activities";
 import firebase from "../../firebase";
+import Header from "../Header"
+
 
 class ActivitiesContainer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = { 
             loading: false,
             items: []
@@ -15,7 +17,7 @@ class ActivitiesContainer extends Component {
 
 
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({loading: true}, ()=>{
             this.itemsRef.on('value', (snapshot) => {
                 const items = snapshot.val();
@@ -23,8 +25,11 @@ class ActivitiesContainer extends Component {
                     id: key,
                     date: items[key].date,
                     notes: items[key].notes,
-                }))
-
+                    author: items[key].author
+                })).filter((each) => {
+                    return each.author === this.props.user.displayName; 
+                })
+                console.log(newState)
                 this.setState(previousState => ({
                     ...previousState,
                     items: newState,
@@ -55,13 +60,17 @@ class ActivitiesContainer extends Component {
     
     render() {
         return (
-            <Activities 
-            activities={this.changeIt(this.state.items)} 
-            removeItem={this.removeItem} 
-            loading={this.state.loading}
-            />
-        )
+            <Fragment>
+                <Header user={this.props.user} handleLogout={this.props.handleLogout} />
+                 <Activities
+                    activities={this.changeIt(this.state.items)}
+                    removeItem={this.removeItem}
+                    loading={this.state.loading}
+                />
+        </Fragment>
+    );
     }
+
 }
 
 export default ActivitiesContainer;
