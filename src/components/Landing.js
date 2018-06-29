@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import {Link} from "react-router-dom"
+import React, { Component, Fragment } from 'react';
 
+import firebase, { auth } from "../firebase";
+import NewActivityForm from "./Form"
 import Header from "./Header"
-import firebase from "../firebase";
 
 class Landing extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             date: '',
             notes: '',
+            author: '',
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,44 +25,34 @@ class Landing extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const itemsRef = firebase.database().ref('items');
-        const data = {
-            date: this.state.date,
-            notes: this.state.notes
-        }
+        const data = { 
+            date: this.state.date, 
+            notes: this.state.notes, 
+            author: this.props.user.displayName 
+        };
         itemsRef.push(data);
         this.setState({
             date: '',
-            notes: ''
+            notes: '',
+            author: ''
         });
     }
 
     render() {
-        return <div className="app">
-            <Header />
-            <div className="container">
-                <section className='display-item'>
-                    <button>
-                        <Link className="anchor_tags" to="/activities"> View past logs</Link>
-                    </button>
-                </section>
-                <section className="add-item">
-                    <form onSubmit={this.handleSubmit}>
-                        <input type="date"
-                            name="date"
-                            onChange={this.handleChange}
-                            value={this.state.date} />
-                        <input type="text"
-                            name="notes"
-                            placeholder="What are you doing?"
-                            onChange={this.handleChange}
-                            value={this.state.notes} />
-                        <button>Save</button>
-                    </form>
-                </section>
-               
-            </div>
-           
-        </div>;
+        console.log("USER: ", this.props.user)
+        return( <div className="app">
+            <Fragment>
+                <Header user={this.props.user} handleLogout={this.props.handleLogout}/>
+                <div className="container">
+                <NewActivityForm 
+                    handleSubmit={this.handleSubmit} 
+                    handleChange={this.handleChange} 
+                    date={this.state.date} 
+                    notes={this.state.notes}/>  
+                </div>  
+            </Fragment>
+        </div>
+        )
     }
 }
 export default Landing;

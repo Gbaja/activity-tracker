@@ -1,28 +1,42 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Landing from "./Landing"
-import ActivitiesContainer from "./Activities/ActivitiesContainer"
+import SignedOutRouter from "./SignoutRouter"
+import SignedInRouter from "./SignedInRouter"
+import { auth } from "../firebase.js";
+import Loading from "./Loading"
+require("dotenv").config();
 
 class App extends Component {
+  state = {
+    loading: true,
+    user: null,
+  };
+
+  componentDidMount() {
+    auth.onAuthStateChanged(user => this.setState({ loading: false, user }));
+  }
+  
+  handleLogout = () => this.setState({ user: null });
+
   render() {
-    return (<BrowserRouter>
-      <Switch>
-        <Route
-          exact
-          path="/"
-          component={Landing}/>
-          }
+    const { loading, user } = this.state;
+
+    if (loading) {
+      return (
+        <Loading/>
+      );
+    }
+    else if (user) {
+      return (
+        <SignedInRouter
+          handleLogout={this.handleLogout}
+          user={user}
         />
-        <Route
-          exact
-          path="/activities"
-          component={ActivitiesContainer} />
-          }
-      />
-      </Switch>
-    </BrowserRouter>
-    )
+      );
+    }
+    else {
+      return <SignedOutRouter />;
+    }
   }
 }
 export default App;
